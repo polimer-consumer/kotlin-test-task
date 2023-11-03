@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.*
 class GameResource(val service: GameService) {
     @CrossOrigin
     @PostMapping("/get")
-    fun getCommand(@RequestBody mode: String): Command? = TODO("Not implemented yet")
+    fun getCommand(@RequestBody mode: String): Command? {
+        service.setMode(Mode.valueOf(mode.replace("\"", "")))
+        return service.getCommand()
+    }
 
     @CrossOrigin
     @PostMapping("/add")
-    fun addCommand(@RequestBody command: Int): Boolean = TODO("Not implemented yet")
+    fun addCommand(@RequestBody command: Int): Boolean =
+        service.addCommand(enumValues<Command>().first { it.ordinal == command })
 
     @CrossOrigin
     @GetMapping("/all")
-    fun getAllCommands(): ArrayDeque<Command> = TODO("Not implemented yet")
+    fun getAllCommands(): ArrayDeque<Command> = service.getAllCommands()
 }
