@@ -97,5 +97,9 @@ configure(subprojects.filter { server in it.name }) {
             sourceCompatibility = jvmVersion
             targetCompatibility = jvmVersion
         }
+
+        withType<Test> {
+            useJUnitPlatform()
+        }
     }
 }

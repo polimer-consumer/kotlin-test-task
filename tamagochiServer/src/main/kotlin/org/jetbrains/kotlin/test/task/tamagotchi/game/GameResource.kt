@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.*
 class GameResource(val service: GameService) {
     @CrossOrigin
     @PostMapping("/get")
-    fun getCommand(@RequestBody mode: String): Command? {
-        service.setMode(Mode.valueOf(mode.replace("\"", "")))
-        return service.getCommand()
-    }
+    fun getCommand(@RequestBody mode: String): Command? =
+        service.getCommand(Mode.valueOf(mode.replace("\"", "")))
 
     @CrossOrigin
     @PostMapping("/add")

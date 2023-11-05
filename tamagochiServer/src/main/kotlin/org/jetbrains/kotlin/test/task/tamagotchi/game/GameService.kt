@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service
 @Service
 class GameService {
     private val commands: ArrayDeque<Command> = ArrayDeque(MAX_CAPACITY)
-    private var mode = Mode.Queue
 
     companion object {
         private const val MAX_CAPACITY = 16
@@ -21,7 +20,7 @@ class GameService {
         return false
     }
 
-    fun getCommand(): Command? {
+    fun getCommand(mode: Mode): Command? {
         return if (commands.isNotEmpty()) {
             if (mode == Mode.Queue) {
                 commands.removeFirst()
@@ -33,11 +32,5 @@ class GameService {
         }
     }
 
-    fun setMode(mode: Mode) {
-        this.mode = mode
-    }
-
-    fun getAllCommands(): ArrayDeque<Command> {
-        return commands
-    }
+    fun getAllCommands(): ArrayDeque<Command> = commands
 }
